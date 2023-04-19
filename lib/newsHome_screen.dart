@@ -1,7 +1,7 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/newsDetail_screen.dart';
+
+import 'widgets/newsItem.dart';
 
 class NewsHomeScreen extends StatefulWidget {
   const NewsHomeScreen({super.key});
@@ -39,82 +39,10 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
             return ListView.separated(
               itemBuilder: (context, index) {
                 var firstContent = snapshot.data![index]["content"].toString();
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              NewsDetailScreen(data: snapshot.data[index]),
-                        ),
-                      );
-                    },
-                    child: Stack(
-                      children: [
-                        Hero(
-                          tag: snapshot.data![index]["id"],
-                          child: AspectRatio(
-                            aspectRatio: 16 / 9,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                      snapshot.data![index]["thumbnail"],
-                                    ),
-                                    fit: BoxFit.cover,
-                                    colorFilter: const ColorFilter.mode(
-                                      Colors.black45,
-                                      BlendMode.darken,
-                                    )),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned.fill(
-                          bottom: 0,
-                          child: ZoomIn(
-                            duration: const Duration(
-                              milliseconds: 400,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    snapshot.data![index]["title"],
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    firstContent.substring(
-                                      0,
-                                      firstContent.indexOf("."),
-                                    ),
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                return NewsItem(
+                  firstContent: firstContent,
+                  snapshot: snapshot,
+                  index: index,
                 );
               },
               separatorBuilder: (context, index) {
