@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetailScreen extends StatefulWidget {
   const NewsDetailScreen({
@@ -15,6 +16,8 @@ class NewsDetailScreen extends StatefulWidget {
 class _NewsDetailScreenState extends State<NewsDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final String articleUrl = widget.data!["news_url"];
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -60,11 +63,17 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(
-                          "Full Article",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.blue.shade800,
+                        GestureDetector(
+                          onTap: () async {
+                            var uri = Uri.parse(articleUrl);
+                            await launchUrl(uri);
+                          },
+                          child: Text(
+                            "Full Article",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.blue.shade800,
+                            ),
                           ),
                         ),
                       ],
@@ -84,6 +93,12 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Icon(Icons.navigate_before_sharp),
       ),
     );
   }

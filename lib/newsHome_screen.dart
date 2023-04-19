@@ -57,26 +57,24 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                       children: [
                         Hero(
                           tag: snapshot.data![index]["id"],
-                          child: ZoomIn(
-                            child: AspectRatio(
-                              aspectRatio: 16 / 9,
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                        snapshot.data![index]["thumbnail"],
-                                      ),
-                                      fit: BoxFit.cover,
-                                      colorFilter: const ColorFilter.mode(
-                                        Colors.black45,
-                                        BlendMode.darken,
-                                      )),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
+                          child: AspectRatio(
+                            aspectRatio: 16 / 9,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                      snapshot.data![index]["thumbnail"],
+                                    ),
+                                    fit: BoxFit.cover,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.black45,
+                                      BlendMode.darken,
+                                    )),
+                                borderRadius: BorderRadius.circular(15),
                               ),
                             ),
                           ),
@@ -85,7 +83,7 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                           bottom: 0,
                           child: ZoomIn(
                             duration: const Duration(
-                              milliseconds: 300,
+                              milliseconds: 400,
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

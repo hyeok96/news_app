@@ -37,6 +37,7 @@ dependencies:
   google_fonts: ^4.0.3
   dio: ^5.1.1
   animate_do: ^3.0.2
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:
